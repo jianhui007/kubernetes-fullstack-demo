@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: fullstack-app
+data:
+  POSTGRES_DB: appdb
+  POSTGRES_USER: appuser
+  POSTGRES_HOST: postgres-service
+  POSTGRES_PORT: "5432"
