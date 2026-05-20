@@ -16,11 +16,15 @@ app.get("/", (req, res) => {
   res.send("Backend API is running");
 });
 
+app.get("/api", (req, res) => {
+  res.send("Backend API is running");
+});
+
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
 
-app.get("/db", async (req, res) => {
+async function checkDatabase(req, res) {
   try {
     const result = await pool.query("SELECT NOW()");
     res.json({
@@ -33,7 +37,10 @@ app.get("/db", async (req, res) => {
       error: error.message,
     });
   }
-});
+}
+
+app.get("/db", checkDatabase);
+app.get("/api/db", checkDatabase);
 
 app.listen(port, () => {
   console.log(`Backend API running on port ${port}`);
